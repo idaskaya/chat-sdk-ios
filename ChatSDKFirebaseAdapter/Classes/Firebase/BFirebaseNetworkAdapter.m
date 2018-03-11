@@ -17,7 +17,14 @@
     if((self = [super init])) {
         
         // Configure app for Facebook login
-        [FIRApp configure];
+        NSString *filePath;
+#ifdef LIVE
+            filePath = [[NSBundle mainBundle] pathForResource:@"GoogleService-Info" ofType:@"plist"];
+#else
+            filePath = [[NSBundle mainBundle] pathForResource:@"GoogleService-Info-Test" ofType:@"plist"];
+#endif
+        FIROptions *options = [[FIROptions alloc] initWithContentsOfFile:filePath];
+        [FIRApp configureWithOptions:options];
         
         
         
