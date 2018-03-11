@@ -106,7 +106,7 @@
         }
     };
     
-    promise.thenOnMain(^id(FIRUser * firebaseUser) {
+    promise.then(^id(FIRUser * firebaseUser) {
         return [self loginWithFirebaseUser: firebaseUser];
     }, Nil);
     
