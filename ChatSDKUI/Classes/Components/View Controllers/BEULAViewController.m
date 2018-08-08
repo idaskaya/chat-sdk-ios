@@ -8,8 +8,8 @@
 
 #import "BEULAViewController.h"
 
-#import <ChatSDK/ChatCore.h>
-#import <ChatSDK/ChatUI.h>
+#import <ChatSDK/Core.h>
+#import <ChatSDK/UI.h>
 
 #define bEULA @"EULA"
 #define bEULAEnglish @"EULAEnglish"
@@ -22,9 +22,9 @@
 
 @synthesize textView;
 
-- (id)init {
+-(instancetype) init {
     
-    self = [super initWithNibName:@"BEULAViewController" bundle:[NSBundle chatUIBundle]];
+    self = [super initWithNibName:@"BEULAViewController" bundle:[NSBundle uiBundle]];
     if (self) {
         // Custom initialization
         self.title = [[NSBundle t:bTermsAndConditions] uppercaseString];
@@ -38,7 +38,7 @@
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:[NSBundle t:bBack] style: UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed)];
     self.navigationItem.leftBarButtonItem = backButton;
     
-    NSString * filePath = [[NSBundle chatUIBundle] pathForResource:@"EULA" ofType:@"plist"];
+    NSString * filePath = [[NSBundle uiBundle] pathForResource:@"EULA" ofType:@"plist"];
     NSDictionary * dict = [NSDictionary dictionaryWithContentsOfFile:filePath];
     
     NSArray * EULATerms = [NSArray arrayWithArray:[dict objectForKey:bEULAEnglish]];
@@ -46,7 +46,7 @@
     NSMutableString * EULA = [NSMutableString new];
     
     for (NSString * string in EULATerms) {
-        [EULA appendString:[NSString stringWithFormat:@"%@\n\n", string]];
+          [EULA appendString:[NSString stringWithFormat:@"%@\n\n", string]];
     }
     
     textView.text = EULA;

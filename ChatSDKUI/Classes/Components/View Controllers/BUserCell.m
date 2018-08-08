@@ -8,7 +8,7 @@
 
 #import "BUserCell.h"
 
-#import <ChatSDK/ChatUI.h>
+#import <ChatSDK/UI.h>
 
 @implementation BUserCell
 
@@ -31,14 +31,11 @@
     
     //self.profileImageView.layer.borderWidth = 2;
     self.statusImageView.layer.cornerRadius = 6;
-    self.stateLabel.text = @"";
-
-    if (user.thumbnail) {
-        self.profileImageView.image = [UIImage imageWithData:user.thumbnail];
-    }
-    else {
-        self.profileImageView.image = user.defaultImage;
-    }
+    [self setStateLabelText:@""];
+    
+    [self.profileImageView sd_setImageWithURL:[NSURL URLWithString: user.imageURL]
+                             placeholderImage:user.imageAsImage
+                                      options:SDWebImageLowPriority & SDWebImageScaleDownLargeImages];
     
     self.title.text = user.name;
     self.subtitle.text = user.statusText;
@@ -51,16 +48,26 @@
     }
 }
 
+-(void) setStateLabelText: (NSString *) state {
+    if(!state || state.length == 0) {
+        [self.statusImageView keepVerticallyCentered];
+    }
+    else {
+        self.statusImageView.keepBottomOffsetTo(self.stateLabel).equal = 5;
+    }
+    self.stateLabel.text = state;
+}
+
 -(void) setOnline {
-    self.statusImageView.image = [NSBundle chatUIImageNamed: @"icn_16_status_online.png"];
+    self.statusImageView.image = [NSBundle uiImageNamed: @"icn_16_status_online.png"];
 }
 
 -(void) setAway {
-    self.statusImageView.image = [NSBundle chatUIImageNamed: @"icn_16_status_away.png"];
+    self.statusImageView.image = [NSBundle uiImageNamed: @"icn_16_status_away.png"];
 }
 
 -(void) setOffline {
-    self.statusImageView.image = [NSBundle chatUIImageNamed: @"icn_16_status_offline.png"];
+    self.statusImageView.image = [NSBundle uiImageNamed: @"icn_16_status_offline.png"];
 }
 
 

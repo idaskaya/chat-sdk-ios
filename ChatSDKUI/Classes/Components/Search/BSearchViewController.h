@@ -12,7 +12,7 @@
 @class MBProgressHUD;
 @class BSearchIndexViewController;
 
-@interface BSearchViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, PSearchViewController> {
+@interface BSearchViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, PSearchViewController /* ,UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating */> {
     
     NSMutableArray * _users;
     NSMutableArray * _selectedUsers;
@@ -21,14 +21,19 @@
     NSArray * _usersToExclude;
     
     id _internetConnectionObserver;
-    BSearchIndexViewController * _searchTermViewController;
+    UINavigationController * _searchTermNavigationController;
     NSArray * _currentSearchIndex;
     BOOL _showKeyboardOnLoad;
     
     UIBarButtonItem * _addButton;
+//    UISearchController * _searchController;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, readwrite) NSArray * selectedUsers;
+
+@property (nonatomic, readwrite) UINavigationController * searchTermNavigationController;
+@property (nonatomic, readwrite) NSArray * currentSearchIndex;
 
 @property (weak, nonatomic) IBOutlet UITextField *searchBox;
 @property (nonatomic, readwrite, copy) void(^usersSelected)(NSArray * users);
@@ -38,6 +43,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *noUsersFoundLabel;
 @property (weak, nonatomic) IBOutlet UIView *noUsersFoundView;
 
-- (id)initWithUsersToExclude: (NSArray *) excludedUsers;
+@property (nonatomic, readwrite) UIBarButtonItem * addButton;
+
+
+-(void) addButtonPressed;
+-(void) clearAndReload;
+-(void) searchWithText: (NSString *) text;
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
 
 @end

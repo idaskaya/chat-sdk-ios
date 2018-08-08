@@ -8,8 +8,8 @@
 
 #import "BPrivateThreadsViewController.h"
 
-#import <ChatSDK/ChatCore.h>
-#import <ChatSDK/ChatUI.h>
+#import <ChatSDK/Core.h>
+#import <ChatSDK/UI.h>
 
 @interface BPrivateThreadsViewController ()
 
@@ -17,12 +17,12 @@
 
 @implementation BPrivateThreadsViewController
 
-- (id)init
+-(instancetype) init
 {
-    self = [super initWithNibName:Nil bundle:[NSBundle chatUIBundle]];
+    self = [super initWithNibName:Nil bundle:[NSBundle uiBundle]];
     if (self) {
         self.title = [NSBundle t:bConversations];
-        self.tabBarItem.image = [NSBundle chatUIImageNamed: @"icn_30_chat.png"];
+        self.tabBarItem.image = [NSBundle uiImageNamed: @"icn_30_chat.png"];
 
     }
     return self;
@@ -54,30 +54,28 @@
 }
 
 -(void) createPrivateThread {
-    
-    BFriendsListViewController * flvc = (BFriendsListViewController *) [[BInterfaceManager sharedManager].a friendsViewControllerWithUsersToExclude:@[]];
-    
-    // The friends view controller will give us a list of users to invite
-    flvc.usersToInvite = ^(NSArray * users, NSString * groupName){
+
+    __weak __typeof__(self) weakSelf = self;
+
+    UINavigationController * nav = [[BInterfaceManager sharedManager].a friendsNavigationControllerWithUsersToExclude:@[] onComplete:^(NSArray * users, NSString * groupName){
+        __typeof__(self) strongSelf = weakSelf;
         
-        MBProgressHUD * hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        MBProgressHUD * hud = [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
         hud.label.text = [NSBundle t:bCreatingThread];
         
         // Create group with group name
         [NM.core createThreadWithUsers:users name:groupName threadCreated:^(NSError *error, id<PThread> thread) {
             if (!error) {
-                [self pushChatViewControllerWithThread:thread];
+                [strongSelf pushChatViewControllerWithThread:thread];
             }
             else {
                 [UIView alertWithTitle:[NSBundle t:bErrorTitle] withMessage:[NSBundle t:bThreadCreationError]];
             }
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
         }];
-    };
+    }];
     
-    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:flvc];
-    
-    [self presentViewController:navController animated:YES completion:Nil];
+    [self presentViewController:nav animated:YES completion:Nil];
 }
 
 -(void) editButtonPressed: (UIBarButtonItem *) item {
@@ -107,7 +105,7 @@
 
 -(void) reloadData {
     [_threads removeAllObjects];
-    [_threads addObjectsFromArray:[NM.core threadsWithType:bThreadFilterPrivateThread]];
+    [_threads addObjectsFromArray:[NM.core threadsWithType:bThreadFilterPrivateThread includeDeleted:YES]];
     [super reloadData];
 }
 

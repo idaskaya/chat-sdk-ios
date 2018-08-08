@@ -8,8 +8,8 @@
 
 #import "BFriendsListViewController.h"
 
-#import <ChatSDK/ChatCore.h>
-#import <ChatSDK/ChatUI.h>
+#import <ChatSDK/Core.h>
+#import <ChatSDK/UI.h>
 
 #define bUserCellIdentifier @"bUserCellIdentifier"
 
@@ -34,16 +34,17 @@
 // If we create it with a thread then we look at who is in the thread and make sure they don't come up on the lists
 // If we are creating a new thread then we don't mind
 
-- (id)initWithUsersToExclude: (NSArray<PUser> *) users {
+-(instancetype) initWithUsersToExclude: (NSArray *) users onComplete: (void(^)(NSArray * users, NSString * name)) action {
     if ((self = [self init])) {
         self.title = [NSBundle t:bPickFriends];
         [_contactsToExclude addObjectsFromArray:users];
+        self.usersToInvite = action;
     }
     return self;
 }
 
--(id) init {
-    self = [super initWithNibName:@"BFriendsListViewController" bundle:[NSBundle chatUIBundle]];
+-(instancetype) init {
+    self = [super initWithNibName:@"BFriendsListViewController" bundle:[NSBundle uiBundle]];
     if (self) {
         self.title = [NSBundle t:bPickFriends];
         _selectedContacts = [NSMutableArray new];
@@ -82,7 +83,7 @@
     
     [self reloadData];
     
-    [tableView registerNib:[UINib nibWithNibName:@"BUserCell" bundle:[NSBundle chatUIBundle]] forCellReuseIdentifier:bUserCellIdentifier];
+    [tableView registerNib:[UINib nibWithNibName:@"BUserCell" bundle:[NSBundle uiBundle]] forCellReuseIdentifier:bUserCellIdentifier];
 
     [self setGroupNameHidden:YES duration:0];
 }

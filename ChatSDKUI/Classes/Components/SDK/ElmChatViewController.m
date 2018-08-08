@@ -11,12 +11,13 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
 
-#import <ChatSDK/ChatCore.h>
-#import <ChatSDK/ChatUI.h>
+#import <ChatSDK/Core.h>
+#import <ChatSDK/UI.h>
 
 
 // The distance to the bottom of the screen you need to be for the tableView to snap you to the bottom
 #define bTableViewRefreshHeight 300
+#define bTableViewBottomMargin 5
 
 @interface ElmChatViewController ()
 
@@ -26,11 +27,13 @@
 
 @synthesize tableView;
 @synthesize delegate;
+@synthesize sendBarView = _sendBarView;
+@synthesize titleLabel = _titleLabel;
 
-- (id)initWithDelegate: (id<ElmChatViewDelegate>) delegate_
+-(instancetype) initWithDelegate: (id<ElmChatViewDelegate>) delegate_
 {
     self.delegate = delegate_;
-    self = [super initWithNibName:@"BChatViewController" bundle:[NSBundle chatUIBundle]];
+    self = [super initWithNibName:@"BChatViewController" bundle:[NSBundle uiBundle]];
     if (self) {
         
         // Add a tap recognizer so when we tap the table we dismiss the keyboard
@@ -40,16 +43,8 @@
         _tapRecognizer.enabled = NO;
         [self.view addGestureRecognizer:_tapRecognizer];
         
-        // Observe for keyboard appear and disappear notifications
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:Nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:Nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:Nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:Nil];
-        
-        //[delegate.thread markRead];
-        
         // When a user taps the title bar we want to know to show the options screen
-        if ([BSettingsManager userChatInfoEnabled]) {
+        if (BChatSDK.config.userChatInfoEnabled) {
             UITapGestureRecognizer * titleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(navigationBarTapped)];
             [self.navigationItem.titleView addGestureRecognizer:titleTapRecognizer];
         }
@@ -59,19 +54,20 @@
 
 // The text input view sits on top of the keyboard
 -(void) setupTextInputView {
-    _textInputView = [[BTextInputView alloc] init];
-    _textInputView.messageDelegate = self;
+    _sendBarView = [[BInterfaceManager sharedManager].a sendBarView];
+    [_sendBarView setSendBarDelegate:self];
     
+    [self.view addSubview:_sendBarView];
     
-    [self.view addSubview:_textInputView];
-    
-    _textInputView.keepBottomInset.equal = 0;
-    _textInputView.keepLeftInset.equal = 0;
-    _textInputView.keepRightInset.equal = 0;
+//    [_sendBarView.bottomAnchor constraintEqualToAnchor:self.view.layoutMarginsGuide.bottomAnchor constant:0];
+
+    _sendBarView.keepBottomInset.equal = [self textInputViewBottomInset];
+    _sendBarView.keepLeftInset.equal = 0;
+    _sendBarView.keepRightInset.equal = 0;
     
     // Constrain the table to the top of the toolbar
-    tableView.keepBottomOffsetTo(_textInputView).equal =  -_textInputView.fh;
-    [self setTableViewBottomContentInset:_textInputView.fh];
+    tableView.keepBottomOffsetTo(_sendBarView).equal = -_sendBarView.fh;
+    [self setTableViewBottomContentInset:_sendBarView.fh];
 }
 
 -(void) registerMessageCells {
@@ -94,7 +90,7 @@
 
 // The naivgation bar has three functions
 // 1 - Shows the name of the chat
-// 2 - Show's a message or the list of users
+// 2 - Show's a message or the list of usersBTextInputView
 // 3 - Show's who's typing
 -(void) setupNavigationBar {
     
@@ -132,8 +128,7 @@
     _keyboardOverlay = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.fh, self.view.fw, 0)];
     _keyboardOverlay.backgroundColor = [UIColor whiteColor];
     
-    _optionsHandler = [[BInterfaceManager sharedManager].a chatOptionsHandlerWithChatViewController:self];
-    [_optionsHandler setDelegate: self];
+    _optionsHandler = [[BInterfaceManager sharedManager].a chatOptionsHandlerWithDelegate:self];
     
     if(_optionsHandler.keyboardView) {
         [_keyboardOverlay addSubview:_optionsHandler.keyboardView];
@@ -174,6 +169,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Large titles will interfere with the custom navigation bar
+    self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeNever;
+    
     // Keep the table header at the top
     if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
         self.automaticallyAdjustsScrollViewInsets = YES;
@@ -191,6 +189,7 @@
     // just to give the top message a bit more space
     UIEdgeInsets tableInsets = tableView.contentInset;
     tableInsets.top += 5;
+    tableInsets.bottom += bTableViewBottomMargin;
     tableView.contentInset = tableInsets;
     
     // Add the refresh control - drag to load more messages
@@ -199,13 +198,13 @@
     [tableView addSubview:_refreshControl];
     
     [self setupTextInputView];
-    
+
     [self registerMessageCells];
-    
+
     [self setupNavigationBar];
-    
+
     [self updateInterfaceForReachabilityStateChange];
-    
+
     [self setupKeyboardOverlay];
 
 }
@@ -236,11 +235,11 @@
 }
 
 -(void) setTextInputDisabled: (BOOL) disabled {
-    _textInputView.hidden = disabled;
+    _sendBarView.hidden = disabled;
 }
 
 -(void) setAudioEnabled:(BOOL)enabled {
-    [_textInputView setAudioEnabled: enabled];
+    [_sendBarView setAudioEnabled: enabled];
 }
 
 // Typing Indicator
@@ -275,11 +274,6 @@
     
     [self setChatState:bChatStateActive];
     
-    // Add an observer to detect if the app enters the foreground - if this happens we want to add the user to the public thread
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(viewDidAppear:)
-                                                 name:UIApplicationWillEnterForegroundNotification
-                                               object:nil];
     
     [self reloadData];
 }
@@ -288,10 +282,15 @@
     [super viewDidLayoutSubviews];
 }
 
+- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+    [self reloadData];
+}
+
 -(void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self scrollToBottomOfTable:YES];
 }
+
 
 -(void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -306,15 +305,6 @@
     // Typing Indicator
     // When the user leaves then automatically set them not to be typing in the thread
     [self userFinishedTypingWithState: bChatStateInactive];
-}
-
--(void) viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    
-    // Remove the observer when we leave the thread so the function isn't called when returning from foreground when not in chat view
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIApplicationWillEnterForegroundNotification
-                                                  object:nil];
 }
 
 // When the view is tapped - dismiss the keyboard
@@ -343,50 +333,80 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView_ cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     id<PElmMessage> message = [self messageForIndexPath:indexPath];
+
     
     BMessageCell<BMessageDelegate> * messageCell;
-    
-    messageCell = [tableView_ dequeueReusableCellWithIdentifier:message.type.stringValue];
+
+    // We want to check if the message is a premium type but without the libraries added
+    // Without this check the app crashes if the user doesn't have premium cell types
+    if ((![BNetworkManager sharedManager].a.stickerMessage && message.type.integerValue == bMessageTypeSticker) ||
+        (![BNetworkManager sharedManager].a.videoMessage && message.type.integerValue == bMessageTypeVideo) ||
+        (![BNetworkManager sharedManager].a.audioMessage && message.type.integerValue == bMessageTypeAudio)) {
+        // This is a standard text cell
+        messageCell = [tableView_ dequeueReusableCellWithIdentifier:@"0"];
+    }
+    else {
+        messageCell = [tableView_ dequeueReusableCellWithIdentifier:message.type.stringValue];
+    }
+
     messageCell.navigationController = self.navigationController;
-    
+
     // Add a gradient to the cells
     //float colorWeight = ((float) indexPath.row / (float) self.messages.count) * 0.15 + 0.85;
     float colorWeight = 1;
-    
+
     [messageCell setMessage:message withColorWeight:colorWeight];
     
     return messageCell;
 }
 
 -(void) addObservers {
+    [self removeObservers];
+    __weak __typeof__(self) weakSelf = self;
+    [_notificationList add:[[NSNotificationCenter defaultCenter] addObserverForName:kReachabilityChangedNotification object:Nil queue:Nil usingBlock:^(NSNotification * notification) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf updateInterfaceForReachabilityStateChange];
+        });
+    }]];
+    [_notificationList add:[[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationWillEnterForegroundNotification object:Nil queue:Nil usingBlock:^(NSNotification * notification) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf addUserToPublicThreadIfNecessary];
+        });
+    }]];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateInterfaceForReachabilityStateChange)
-                                                 name:kReachabilityChangedNotification
-                                               object:Nil];
+    // Observe for keyboard appear and disappear notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:Nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:Nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:Nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:Nil];
     
 }
 
 -(void) removeObservers {
-
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:kReachabilityChangedNotification
-                                                  object:Nil];
+    [_notificationList dispose];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:Nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:Nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:Nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:Nil];
 
 }
+
+-(void) addUserToPublicThreadIfNecessary {}
 
 // Layout out the bubbles. Do this after the cell's been made so we have
 // access to the cell dimensions
 -(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [((UITableViewCell<BMessageDelegate> *) cell) willDisplayCell];
+    if ([cell respondsToSelector:@selector(willDisplayCell)]) {
+        [cell performSelector:@selector(willDisplayCell)];
+    }
 }
 
 // Set the message height based on the text height
 - (CGFloat)tableView:(UITableView *)tableView_ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     id<PElmMessage> message = [self messageForIndexPath:indexPath];
     if(message) {
-        id<PMessageLayout> l = [BMessageLayout layoutWithMessage:message];
-        return l.cellHeight;
+        return [BMessageCell cellHeight:message maxWidth:[BMessageCell maxTextWidth:message]];
     }
     else {
         return 0;
@@ -398,17 +418,15 @@
     
     if ([cell isKindOfClass:[BImageMessageCell class]]) {
         
-        if (!_imageViewController) {
-            _imageViewController = [[BImageViewController alloc] initWithNibName:nil bundle:Nil];
-            _imageViewNavigationController = [[UINavigationController alloc] initWithRootViewController:_imageViewController];
+        if (!_imageViewNavigationController) {
+            _imageViewNavigationController = [[BInterfaceManager sharedManager].a imageViewNavigationController];
         }
 
         // Only allow the user to click if the image is not still loading hence the alpha is 1
         if (cell.imageView.alpha == 1) {
             
             // TODO: Refactor this to use the JSON keys
-            NSArray * myArray = [cell.message.textString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@","]];
-            NSURL * url = [NSURL URLWithString:myArray[1]];
+            NSURL * url = cell.message.imageURL;
             
             // Add an activity indicator while the image is loading
             UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -419,6 +437,7 @@
             [cell.imageView bringSubviewToFront:activityIndicator];
             cell.imageView.alpha = 0.75;
             
+            __weak __typeof__(self) weakSelf = self;
             [cell.imageView sd_setImageWithURL:url placeholderImage:cell.imageView.image completed: ^(UIImage * image, NSError * error, SDImageCacheType cacheType, NSURL * imageURL) {
                 
                 // Then remove it here
@@ -426,23 +445,20 @@
                 [activityIndicator removeFromSuperview];
                 cell.imageView.alpha = 1;
                 
-                _imageViewController.image = image;
-                [self.navigationController presentViewController:_imageViewNavigationController animated:YES completion:Nil];
+                [((id<PImageViewController>) _imageViewNavigationController.topViewController) setImage: image];
+                [weakSelf.navigationController presentViewController:_imageViewNavigationController animated:YES completion:Nil];
             }];
         }
     }
     if ([cell isKindOfClass:[BLocationCell class]]) {
-        if (!_locationViewController) {
-            _locationViewController = [[BLocationViewController alloc] initWithNibName:nil bundle:Nil];
-            _locationViewNavigationController = [[UINavigationController alloc] initWithRootViewController:_locationViewController];
+        if (!_locationViewNavigationController) {
+            _locationViewNavigationController = [[BInterfaceManager sharedManager].a locationViewNavigationController];
         }
         
         float longitude = [[cell.message textAsDictionary][bMessageLongitude] floatValue];
         float latitude = [[cell.message textAsDictionary][bMessageLatitude] floatValue];
         
-        // Set the location and display the controller
-        _locationViewController.region = [BCoreUtilities regionForLongitude:longitude latitude:latitude];
-        _locationViewController.annotation = [BCoreUtilities annotationForLongitude:longitude latitude:latitude];
+        [((id<PLocationViewController>) _locationViewNavigationController.topViewController) setLatitude:latitude longitude:longitude];
 
         [self.navigationController presentViewController:_locationViewNavigationController animated:YES completion:Nil];
     }
@@ -476,19 +492,6 @@
                 
                 [_videoPlayer setFullscreen:YES animated:YES];
                 
-                /*
-                 if (!cell.message.attachmentDownloaded) {
-                 
-                 // To download the video we need to download it into our documents to a temporary location before saving to
-                 NSURLSessionTask * download = [[NSURLSession sharedSession] downloadTaskWithURL:url completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
-                 NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] firstObject];
-                 NSURL *tempURL = [documentsURL URLByAppendingPathComponent:[url lastPathComponent]];
-                 [[NSFileManager defaultManager] moveItemAtURL:location toURL:tempURL error:nil];
-                 UISaveVideoAtPathToSavedPhotosAlbum(tempURL.path, self, nil, nil);
-                 }];
-                 
-                 [download resume];
-                 }*/
             }
         }
     }
@@ -503,18 +506,12 @@
     // Once a user sends a message they are no longer typing
     [self userFinishedTypingWithState: bChatStateActive];
     
-    NSString * newMessage = [message stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+    NSString * newMessage = [message stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     return [self handleMessageSend:[delegate  sendText:newMessage withMeta:meta]];
 }
 
 -(RXPromise *) sendTextMessage: (NSString *) message {
-
-    // Typing indicator
-    // Once a user sends a message they are no longer typing
-    [self userFinishedTypingWithState: bChatStateActive];
-    
-    NSString * newMessage = [message stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-    return [self handleMessageSend:[delegate sendText:newMessage]];
+    return [self sendTextMessage:message withMeta:Nil];
 }
 
 -(RXPromise *) sendImageMessage: (UIImage *) image {
@@ -523,6 +520,7 @@
 }
 
 -(RXPromise *) handleMessageSend: (RXPromise *) promise {
+    [self reloadData];
     return promise.thenOnMain(^id(id success) {
         [self scrollToBottomOfTable:YES];
         return Nil;
@@ -534,12 +532,15 @@
 
 -(void) sendAudioMessage: (NSData *) data duration: (double) seconds {
     
-    if (seconds > 2) {
+    if (seconds > 1) {
         [self handleMessageSend:[delegate sendAudio:data withDuration:seconds]];
     }
     else {
-        [UIView alertWithTitle:[NSBundle t:bErrorTitle]
-                   withMessage:[NSBundle t: bHoldToSendAudioMessageError]];
+        // TODO: Make the tost position above the text bar programatically
+        [self.view makeToast:[NSBundle t:bHoldToSendAudioMessageError]
+                    duration:2
+                    position:[NSValue valueWithCGPoint: CGPointMake(self.view.frame.size.width / 2.0, self.view.frame.size.height - 120)]];
+
     }
     
     [self reloadData];
@@ -559,8 +560,9 @@
 }
 
 -(BOOL) showOptions {
-    // TODO: Check this
-    [_textInputView becomeFirstResponder];
+    
+    // Needed for keyboard overlay to raise keyboard
+    [_sendBarView becomeTextViewFirstResponder];
     
     if (_optionsHandler.keyboardView) {
         _keyboardOverlay.alpha = 1;
@@ -571,7 +573,8 @@
 }
 
 -(BOOL) hideOptions {
-    [_textInputView becomeFirstResponder];
+    [_sendBarView becomeTextViewFirstResponder];
+
     _keyboardOverlay.alpha = 0;
     _keyboardOverlay.userInteractionEnabled = NO;
     return [_optionsHandler hide];
@@ -585,7 +588,7 @@
 }
 
 -(void) hideKeyboard {
-    [_textInputView resignFirstResponder];
+    [_sendBarView resignTextViewFirstResponder];
 }
 
 #pragma BChatOptionDelegate
@@ -596,9 +599,12 @@
 
 // TODO: Change this to handleMessageSend
 -(void) chatOptionActionExecuted:(RXPromise *)promise {
+    
     [self handleMessageSend:promise];
+    __weak __typeof__(self) weakSelf = self;
     promise.thenOnMain(^id(id success) {
-        [self reloadData];
+        __typeof__(self) strongSelf = weakSelf;
+        [strongSelf reloadData];
         return Nil;
     }, Nil);
 }
@@ -674,7 +680,7 @@
     [UIView commitAnimations];
     
     // Set the new constraints
-    _textInputView.keepBottomInset.equal = keyboardBoundsConverted.size.height;
+    _sendBarView.keepBottomInset.equal = keyboardBoundsConverted.size.height;
     
     [[UIApplication sharedApplication].windows.lastObject addSubview: _keyboardOverlay];
     _keyboardOverlay.frame = keyboardBounds;
@@ -705,9 +711,11 @@
     // Once the keyboard appears we remove the constraint to the toolbar
     // and add y displacement by adding an offset instead. This allows
     // the messages to scroll under the keyboard
+    __weak __typeof__(self) weakSelf = self;
+
     [UIView animateWithDuration:0.3 animations:^ {
-        [self setTableViewBottomContentInset:keyboardBoundsConverted.size.height + _textInputView.fh];
-        [tableView.keepBottomOffsetTo(_textInputView) remove];
+        [weakSelf setTableViewBottomContentInset:keyboardBoundsConverted.size.height + _sendBarView.fh];
+        [tableView.keepBottomOffsetTo(_sendBarView) deactivate];
     }];
     
     // Enable the tap gesture recognizer to hide the keyboard
@@ -722,8 +730,8 @@
     CGRect keyboardBounds = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     
     _keyboardOverlay.frame = keyboardBounds;
-
-    _textInputView.keepBottomInset.equal = 0;
+    
+    _sendBarView.keepBottomInset.equal = [self textInputViewBottomInset];
     [self.view setNeedsUpdateConstraints];
     
     [UIView beginAnimations:Nil context:Nil];
@@ -734,7 +742,7 @@
     [self.view layoutIfNeeded];
     
     // Set the inset so it's correct when we animate back to normal
-    [self setTableViewBottomContentInset:_textInputView.fh];
+    [self setTableViewBottomContentInset:_sendBarView.fh];
 
     [UIView commitAnimations];
     
@@ -743,10 +751,19 @@
     
 }
 
+-(float) textInputViewBottomInset {
+    // Fix for the iPhone X
+    // Move the text input up to avoid the bottom area
+    if([UIScreen mainScreen].nativeBounds.size.height == 2436) {
+        return 30;
+    }
+    return 0;
+}
+
 -(void) keyboardDidHide: (NSNotification *) notification {
     // Do the reverse process to above. So the table sticks back to
     // the toolbar again
-    tableView.keepBottomOffsetTo(_textInputView).equal = -_textInputView.fh;
+    tableView.keepBottomOffsetTo(_sendBarView).equal = -_sendBarView.fh;
     [_keyboardOverlay removeFromSuperview];
 
 }
@@ -835,5 +852,19 @@
     [self setChatState:state];
     [_typingTimer invalidate];
 }
+
+-(UIViewController *) viewController {
+    return self;
+}
+
+-(void) dealloc {
+    self.delegate = Nil;
+    [_sendBarView setSendBarDelegate:Nil];
+    self.tableView.delegate = Nil;
+    self.tableView.dataSource = Nil;
+    [_typingTimer invalidate];
+    _typingTimer = Nil;
+}
+
 
 @end

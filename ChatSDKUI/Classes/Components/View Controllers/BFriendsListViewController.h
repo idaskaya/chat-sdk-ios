@@ -10,6 +10,7 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <VENTokenField/VENTokenField.h>
 #import <ChatSDK/PThread_.h>
+#import <ChatSDK/PFriendsListViewController.h>
 
 @class BSearchIndexViewController;
 @class MBProgressHUD;
@@ -22,7 +23,7 @@
 
 @end
 
-@interface BFriendsListViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, VENTokenFieldDelegate, VENTokenFieldDataSource, UITextFieldDelegate> {
+@interface BFriendsListViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, VENTokenFieldDelegate, VENTokenFieldDataSource, UITextFieldDelegate, PFriendsListViewController> {
     NSMutableArray * _contacts;
     NSMutableArray * _selectedContacts;
     NSMutableArray * _contactsToExclude;
@@ -34,7 +35,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, readwrite, copy) void (^usersToInvite)(NSArray * users, NSString * groupName);
 @property (nonatomic, readwrite) NSString * rightBarButtonActionTitle;
-@property (nonatomic, readwrite) NSArray * (^overrideContacts)();
+@property (nonatomic, readwrite) NSArray * (^overrideContacts)(void);
 
 @property (weak, nonatomic) IBOutlet VENTokenField * _tokenField;
 @property (strong, nonatomic) NSMutableArray * names;
@@ -44,7 +45,7 @@
 
 @property (nonatomic, readwrite) int maximumSelectedUsers;
 
-- (id)initWithUsersToExclude: (NSArray<PUser> *) users;
+-(instancetype) initWithUsersToExclude: (NSArray *) users onComplete: (void(^)(NSArray * users, NSString * name)) action;
 
 -(void) setUsersToExclude: (NSArray *) users;
 -(void) setSelectedUsers: (NSArray *) users;

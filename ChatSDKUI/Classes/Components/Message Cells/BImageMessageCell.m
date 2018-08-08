@@ -8,16 +8,16 @@
 
 #import "BImageMessageCell.h"
 
-#import <ChatSDK/ChatCore.h>
+#import <ChatSDK/Core.h>
 #import <ChatSDK/PElmMessage.h>
-#import <ChatSDK/ChatUI.h>
+#import <ChatSDK/UI.h>
 
 
 @implementation BImageMessageCell
 
 @synthesize imageView;
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+-(instancetype) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -33,7 +33,7 @@
     return self;
 }
 
--(void) setMessage: (id<PElmMessage,PMessageLayout>) message withColorWeight:(float)colorWeight {
+-(void) setMessage: (id<PElmMessage>) message withColorWeight:(float)colorWeight {
     [super setMessage:message withColorWeight:colorWeight];
     
     // Get rid of the bubble for images
@@ -45,11 +45,12 @@
     
     UIImage * placeholder = [UIImage imageWithData:message.placeholder];
     if (!placeholder) {
-        placeholder = [NSBundle chatUIImageNamed:bDefaultPlaceholderImage];
+        placeholder = [NSBundle uiImageNamed:bDefaultPlaceholderImage];
     }
         
     [imageView sd_setImageWithURL:message.thumbnailURL
                  placeholderImage:placeholder
+                          options:SDWebImageLowPriority & SDWebImageScaleDownLargeImages
                         completed:nil];
 }
 

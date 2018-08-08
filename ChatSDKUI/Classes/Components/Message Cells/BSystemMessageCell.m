@@ -8,15 +8,15 @@
 
 #import "BSystemMessageCell.h"
 
-#import <ChatSDK/ChatCore.h>
-#import <ChatSDK/ChatUI.h>
+#import <ChatSDK/Core.h>
+#import <ChatSDK/UI.h>
 #import <ChatSDK/PElmMessage.h>
 
 @implementation BSystemMessageCell
 
 @synthesize textView;
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+-(instancetype) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -43,7 +43,7 @@
     return self;
 }
 
--(void) setMessage: (id<PElmMessage, PMessageLayout>) message withColorWeight:(float)colorWeight {
+-(void) setMessage: (id<PElmMessage>) message withColorWeight:(float)colorWeight {
     [super setMessage:message withColorWeight:colorWeight];
     
     NSDictionary * dict = [message textAsDictionary];
@@ -64,17 +64,15 @@
 
 -(void) willDisplayCell {
     
-    id<PMessageLayout> l = [BMessageLayout layoutWithMessage:_message];
-    
-    float margin = l.bubbleMargin;
-    float padding = l.bubblePadding;
+    float margin = self.bubbleMargin;
+    float padding = self.bubblePadding;
     
     // HERE
     // Set the margins and height for message
     [self.bubbleImageView setFrame:CGRectMake(margin,
                                          margin,
-                                         l.bubbleWidth,
-                                         l.bubbleHeight)];
+                                         self.bubbleWidth,
+                                         self.bubbleHeight)];
     
     _nameLabel.frame = CGRectZero;
     _timeLabel.frame = CGRectZero;
@@ -83,8 +81,8 @@
     // Update the content view size for the message length
     [self cellContentView].frame = CGRectMake(padding,
                                               padding,
-                                              l.messageWidth + padding,
-                                              l.messageHeight + padding);
+                                              self.messageWidth + padding,
+                                              self.messageHeight + padding);
     
     // Layout the profile picture
     _profilePicture.frame = CGRectZero;

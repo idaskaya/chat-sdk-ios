@@ -7,7 +7,7 @@
 //
 
 #import "BSettingsManager.h"
-#import <ChatSDK/ChatCore.h>
+#import <ChatSDK/Core.h>
 
 #define bMainKey @"chat_sdk"
 
@@ -23,7 +23,7 @@
 #define bEnabledKey @"enabled"
 #define bPathKey @"path"
 #define bCloudMessagingServerKey @"cloud_messaging_server_key"
-#define bStorageKey @"storage_path"
+
 #define bAppIDKey @"app_id"
 #define bAppSecret @"app_secret"
 #define bAppVersion @"app_version"
@@ -34,7 +34,6 @@
 #define bSecretKey @"secret"
 #define bFirebaseStorageBucket @"STORAGE_BUCKET"
 
-#define bAppBadgeEnabledKey @"app_badge_enabled"
 #define bUserChatInfoEnabledKey @"user_chat_info_enabled"
 
 @implementation BSettingsManager
@@ -84,10 +83,6 @@
     return [self string_s:@[bTwitterKey, bSecretKey]];
 }
 
-+(NSString *) googleApiKey {
-    return [self string_s:@[bGoogleKey, bApiKey]];
-}
-
 +(NSString *) googleClientKey {
     return [self string_s:@[bGoogleKey, bClientKey]];
 }
@@ -108,18 +103,8 @@
     return [self string_s:@[bFirebaseKey, bCloudMessagingServerKey]];
 }
 
-//+(NSString *) firebaseStoragePath {
-//    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"GoogleService-Info" ofType:@"plist"];
-//    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:plistPath];
-//    return [@"gs://" stringByAppendingString:dict[bFirebaseStorageBucket]];
-//}
-
 +(NSString *) firebaseRootPath {
-    NSString * path = [self string_s:@[bFirebaseKey, bRootPathKey]];
-    if(!path) {
-        path = [BChatSDK shared].configuration.rootPath;
-    }
-    return path;
+    return [self string_s:@[bFirebaseKey, bRootPathKey]];
 }
 
 +(NSString *) parseAppId {
@@ -134,11 +119,6 @@
     return [self string_s:@[bSettingsKey, bTimeFormat]];
 }
 
-// Turn on whether the app badge reflects how many unread messages there are
-+(BOOL) appBadgeEnabled {
-    return [[self number_s:@[bSettingsKey, bAppBadgeEnabledKey]] boolValue];
-}
-
 // Turn on whether users can access the BUsersViewController from the chat view
 +(BOOL) userChatInfoEnabled {
     return [[self number_s:@[bSettingsKey, bUserChatInfoEnabledKey]] boolValue];
@@ -149,7 +129,7 @@
     if(modules) {
         return modules[module][property];
     }
-    return @{};
+    return @"";
 }
 
 

@@ -30,7 +30,9 @@ XcodeSnapchat/
 XcodeTest/
 XcodeTestAll/
 XcodeTed/
+XcodeEric/
 XcodeXMPP/
+XcodeCalvin/
 XcodeXMPPSwift/
 FirebaseUI-iOS/
 firebase-ios-sdk/
@@ -41,6 +43,14 @@ Old/
 XcodeStefan/
 XcodeFirebaseWithPods/
 FirebaseAdapter/
+XcodeChatcat/
+XcodeXMPPXolile/
+XcodeLive/
+XcodePrivate/
+XcodeXMPPClient/
+ChatSDKModules/
+Archived/
+XcodeModules/
 
 # Ignore these in subfolders, but track in root of repo
 ChatSDKFirebase/

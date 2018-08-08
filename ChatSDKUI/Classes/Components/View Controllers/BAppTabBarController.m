@@ -8,8 +8,8 @@
 
 #import "BAppTabBarController.h"
 
-#import <ChatSDK/ChatCore.h>
-#import <ChatSDK/ChatUI.h>
+#import <ChatSDK/Core.h>
+#import <ChatSDK/UI.h>
 
 
 #define bMessagesBadgeValueKey @"bMessagesBadgeValueKey"
@@ -20,13 +20,15 @@
 
 @implementation BAppTabBarController
 
--(id) init {
+@synthesize lifecycleHelper = _helper;
+
+-(instancetype) init {
     if((self = [super init])) {
     }
     return self;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+-(instancetype) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
     
@@ -57,8 +59,8 @@
         [self setSelectedIndex:0];
     }];
     
-    __weak BAppTabBarController * weakSelf = self;
-    
+    __weak __typeof__(self) weakSelf = self;
+
     // When a message is recieved we increase the messages tab number
     [[NSNotificationCenter defaultCenter] addObserverForName:bNotificationBadgeUpdated object:Nil queue:Nil usingBlock:^(NSNotification * notification) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -86,6 +88,35 @@
         });
     }];
     
+    [[NSNotificationCenter defaultCenter] addObserverForName:bNotificationPresentChatView object:Nil queue:Nil usingBlock:^(NSNotification * notification) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if(BChatSDK.shared.configuration.shouldOpenChatWhenPushNotificationClicked) {
+                id<PThread> thread = notification.userInfo[bNotificationPresentChatView_PThread];
+                if(thread) {
+                    // Set the tab to the private threads screen
+                    NSArray * vcs = [[BInterfaceManager sharedManager].a tabBarViewControllers];
+                    NSInteger index = [vcs indexOfObject:[BInterfaceManager sharedManager].a.privateThreadsViewController];
+                    
+                    
+                    if(index != NSNotFound) {
+                        [self setSelectedIndex:index];
+                        UIViewController * chatViewController = [[BInterfaceManager sharedManager].a chatViewControllerWithThread:thread];
+                        
+                        // Reset navigation stack
+                        for(UINavigationController * nav in self.viewControllers) {
+                            if(nav.viewControllers.count) {
+                                [nav setViewControllers:@[nav.viewControllers.firstObject] animated: NO];
+                            }
+                        }
+                        
+                        [((UINavigationController *)self.viewControllers[index]) pushViewController:chatViewController animated:YES];
+                    }
+                }
+                
+            }
+        });
+    }];
+    
     NSInteger badge = [[NSUserDefaults standardUserDefaults] integerForKey:bMessagesBadgeValueKey];
     [self setBadge: badge];
     
@@ -94,6 +125,7 @@
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self updateBadge];
+    [NM.core saveToStore];
 }
 
 -(void) viewDidAppear:(BOOL)animated {
@@ -108,6 +140,19 @@
 // If the user changes tab they must be online
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
     [NM.core setUserOnline];
+    [NM.core saveToStore];
+    
+    if ([viewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController * nav = (UINavigationController *) viewController;
+        if (nav.viewControllers.count) {
+            // Should we enable or disable local notifications? We want to show them on every tab that isn't the thread view
+            BOOL showNotification = ![nav.viewControllers.firstObject isEqual:[BInterfaceManager sharedManager].a.privateThreadsViewController] && ![nav.viewControllers.firstObject isEqual:[BInterfaceManager sharedManager].a.publicThreadsViewController];
+            [[BInterfaceManager sharedManager].a setShowLocalNotifications:showNotification];
+            return;
+        }
+    }
+    [[BInterfaceManager sharedManager].a setShowLocalNotifications:NO];
+    
 }
 // End bug fix for v3.0.2
 
@@ -137,13 +182,13 @@
     [[NSUserDefaults standardUserDefaults] setInteger:badge forKey:bMessagesBadgeValueKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    if ([BSettingsManager appBadgeEnabled]) {
+    if ([[BChatSDK shared].configuration appBadgeEnabled]) {
         [UIApplication sharedApplication].applicationIconBadgeNumber = badge;
     }
 }
 
 -(NSBundle *) uiBundle {
-    return [NSBundle chatUIBundle];
+    return [NSBundle uiBundle];
 }
 
 @end

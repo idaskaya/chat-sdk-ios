@@ -8,8 +8,7 @@
 
 #import "BDetailedProfileTableViewController.h"
 
-#import <ChatSDK/ChatCore.h>
-#import <ChatSDK/ChatUI.h>
+#import <ChatSDK/UI.h>
 
 #define bStatusSection 1
 #define bAddFriendCellTag 1
@@ -42,7 +41,7 @@
 @synthesize addFriendCell;
 @synthesize blockUserCell;
 
--(id) initWithCoder:(NSCoder *)aDecoder {
+-(instancetype) initWithCoder:(NSCoder *)aDecoder {
     if ((self = [super initWithCoder:aDecoder])) {
         self.title = [NSBundle t:bProfile];
         [self updateTabBarIcon];
@@ -55,7 +54,7 @@
 {
     [super viewDidLoad];
     
-    _anonymousProfilePicture = [NSBundle chatUIImageNamed:bDefaultProfileImage];
+    _anonymousProfilePicture = [BChatSDK config].defaultBlankAvatar;
     profilePictureButton.layer.cornerRadius = 50;
     
     self.hideSectionsWithHiddenRows = YES;
@@ -82,7 +81,7 @@
     
     if (overrideUser) {
         self.title = user.name;
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[NSBundle chatUIImageNamed:@"icn_22_chat.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(startChat)];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[NSBundle uiImageNamed:@"icn_22_chat.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(startChat)];
         
         self.editPhotoButton.hidden = YES;
         self.profilePictureButton.userInteractionEnabled = NO;
@@ -156,17 +155,17 @@
     [addFriendActivityIndicator startAnimating];
     
     // Handle the result:
-    promise_completionHandler_t success = ^id(id success) {
-        addFriendImageView.highlighted = isFriend;
-        addFriendTextView.text = isFriend ? [NSBundle t: bRemoveFriend] : [NSBundle t:bAddFriend];
-        addFriendActivityIndicator.hidden = YES;
-        return success;
-    };
-    
-    promise_errorHandler_t error = ^id(NSError * error) {
-        addFriendActivityIndicator.hidden = YES;
-        return error;
-    };
+//    promise_completionHandler_t success = ^id(id success) {
+//        addFriendImageView.highlighted = isFriend;
+//        addFriendTextView.text = isFriend ? [NSBundle t: bRemoveFriend] : [NSBundle t:bAddFriend];
+//        addFriendActivityIndicator.hidden = YES;
+//        return success;
+//    };
+//    
+//    promise_errorHandler_t error = ^id(NSError * error) {
+//        addFriendActivityIndicator.hidden = YES;
+//        return error;
+//    };
 }
 
 -(BOOL) isFriend {
@@ -179,17 +178,17 @@
     [blockUserActivityIndicator startAnimating];
     
     // Handle the result:
-    promise_completionHandler_t success = ^id(id success) {
-        blockImageView.highlighted = isBlocked;
-        blockTextView.text = isBlocked ? [NSBundle t:bUnblock] : [NSBundle t:bBlock];
-        blockUserActivityIndicator.hidden = YES;
-        return success;
-    };
-    
-    promise_errorHandler_t error = ^id(NSError * error) {
-        blockUserActivityIndicator.hidden = YES;
-        return error;
-    };
+//    promise_completionHandler_t success = ^id(id success) {
+//        blockImageView.highlighted = isBlocked;
+//        blockTextView.text = isBlocked ? [NSBundle t:bUnblock] : [NSBundle t:bBlock];
+//        blockUserActivityIndicator.hidden = YES;
+//        return success;
+//    };
+//
+//    promise_errorHandler_t error = ^id(NSError * error) {
+//        blockUserActivityIndicator.hidden = YES;
+//        return error;
+//    };
 }
 
 -(BOOL) isBlocked {
@@ -198,8 +197,8 @@
 
 -(void) updateTabBarIcon {
     BOOL female = [[NM.currentUser metaStringForKey:bGender] isEqualToString:@"F"];
-    self.tabBarItem.image = [NSBundle chatUIImageNamed: female ? @"icn_30_profile_f.png" :  @"icn_30_profile.png"];
-    self.tabBarItem.selectedImage = [NSBundle chatUIImageNamed: female ? @"icn_30_profile_f.png" :  @"icn_30_profile.png"];
+    self.tabBarItem.image = [NSBundle uiImageNamed: female ? @"icn_30_profile_f.png" :  @"icn_30_profile.png"];
+    self.tabBarItem.selectedImage = [NSBundle uiImageNamed: female ? @"icn_30_profile_f.png" :  @"icn_30_profile.png"];
 }
 
 -(UIImage *) profilePicture {

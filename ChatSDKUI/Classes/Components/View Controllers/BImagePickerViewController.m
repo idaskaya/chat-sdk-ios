@@ -8,8 +8,8 @@
 
 #import "BImagePickerViewController.h"
 
-#import <ChatSDK/ChatCore.h>
-#import <ChatSDK/ChatUI.h>
+#import <ChatSDK/Core.h>
+#import <ChatSDK/UI.h>
 
 @interface BImagePickerViewController ()
 
@@ -20,7 +20,7 @@
 @synthesize imageView;
 @synthesize delegate;
 
-- (id)initWithType: (UIImagePickerControllerSourceType) type
+-(instancetype) initWithType: (UIImagePickerControllerSourceType) type
 {
     self = [super initWithNibName:Nil bundle:Nil];
     if (self) {

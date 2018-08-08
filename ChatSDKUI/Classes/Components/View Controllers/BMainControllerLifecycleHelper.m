@@ -6,9 +6,12 @@
 //
 
 #import "BMainControllerLifecycleHelper.h"
-#import <ChatSDK/ChatCore.h>
+#import <ChatSDK/Core.h>
 
 @implementation BMainControllerLifecycleHelper
+
+@synthesize loginViewController = _loginViewController;
+@synthesize mainViewController = _viewController;
 
 -(void) viewDidLoad: (UIViewController *) controller {
     

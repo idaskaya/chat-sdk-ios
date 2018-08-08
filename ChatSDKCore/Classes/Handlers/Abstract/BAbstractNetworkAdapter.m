@@ -8,13 +8,13 @@
 
 #import "BAbstractNetworkAdapter.h"
 
-#import <ChatSDK/ChatCore.h>
+#import <ChatSDK/Core.h>
 
 @implementation BAbstractNetworkAdapter {
     NSMutableDictionary * _handlers;
 }
 
--(id) init {
+-(instancetype) init {
     if((self = [super init])) {
         self.contact = [[BBaseContactHandler alloc] init];
         self.imageMessage = [[BBaseImageMessageHandler alloc] init];

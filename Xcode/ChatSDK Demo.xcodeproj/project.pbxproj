@@ -7,110 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AC7777E9AC4696C5650C0624 /* Pods_ChatSDK_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 369A95ECCEDC395C4185D9A1 /* Pods_ChatSDK_Demo.framework */; };
+		9BCFD6CC622C2CCA20AE5EA0 /* Pods_ChatSDK_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1340451633F777ADC5C5C37 /* Pods_ChatSDK_Demo.framework */; };
 		AC7BD9A51E0874B400C785EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC7BD9A31E0874B400C785EE /* Main.storyboard */; };
 		AC7BD9A71E0874B400C785EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC7BD9A61E0874B400C785EE /* Assets.xcassets */; };
 		AC7BD9AA1E0874B400C785EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC7BD9A81E0874B400C785EE /* LaunchScreen.storyboard */; };
 		AC7BD9BF1E096E9000C785EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC7BD9BE1E096E9000C785EE /* GoogleService-Info.plist */; };
-		B5081AC71F56C04B0015417B /* AppDelegate.h in Sources */ = {isa = PBXBuildFile; fileRef = AC7BD99D1E0874B400C785EE /* AppDelegate.h */; };
 		B5081AC81F56C04B0015417B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AC7BD99E1E0874B400C785EE /* AppDelegate.m */; };
 		B5081AC91F56C04B0015417B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AC7BD99B1E0874B400C785EE /* main.m */; };
-		B5081B021F56DA910015417B /* BFirebaseFileStorageModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B5081AED1F56DA910015417B /* BFirebaseFileStorageModule.m */; };
-		B5081B031F56DA910015417B /* BFirebaseUploadHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B5081AEF1F56DA910015417B /* BFirebaseUploadHandler.m */; };
-		B5081B041F56DA910015417B /* BFirebasePushHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B5081AF21F56DA910015417B /* BFirebasePushHandler.m */; };
-		B5081B051F56DA910015417B /* BFirebasePushModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B5081AF41F56DA910015417B /* BFirebasePushModule.m */; };
-		B5081B061F56DA910015417B /* BFirebaseSocialLoginHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B5081AF71F56DA910015417B /* BFirebaseSocialLoginHandler.m */; };
-		B5081B071F56DA910015417B /* BFirebaseSocialLoginModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B5081AF91F56DA910015417B /* BFirebaseSocialLoginModule.m */; };
-		B5081B081F56DA910015417B /* BGoogleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B5081AFB1F56DA910015417B /* BGoogleHelper.m */; };
-		B5081B091F56DA910015417B /* BGoogleLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5081AFD1F56DA910015417B /* BGoogleLoginViewController.m */; };
-		B5081B0A1F56DA910015417B /* BGoogleLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5081AFE1F56DA910015417B /* BGoogleLoginViewController.xib */; };
-		B5081B0B1F56DA910015417B /* icn_200_google@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5081AFF1F56DA910015417B /* icn_200_google@3x.png */; };
-		B5385E7D1F9641D60086D5E5 /* CCThreadWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B5385E5E1F9641D60086D5E5 /* CCThreadWrapper.m */; };
-		B5385E7E1F9641D60086D5E5 /* CCMessageWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B5385E611F9641D60086D5E5 /* CCMessageWrapper.m */; };
-		B5385E7F1F9641D60086D5E5 /* BEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = B5385E621F9641D60086D5E5 /* BEntity.m */; };
-		B5385E801F9641D60086D5E5 /* BFirebaseNetworkAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = B5385E631F9641D60086D5E5 /* BFirebaseNetworkAdapter.m */; };
-		B5385E811F9641D60086D5E5 /* BStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B5385E651F9641D60086D5E5 /* BStateManager.m */; };
-		B5385E821F9641D60086D5E5 /* CCUserWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B5385E661F9641D60086D5E5 /* CCUserWrapper.m */; };
-		B5385E831F9641D60086D5E5 /* NSManagedObject+Status.m in Sources */ = {isa = PBXBuildFile; fileRef = B5385E691F9641D60086D5E5 /* NSManagedObject+Status.m */; };
-		B5385E841F9641D60086D5E5 /* Firebase+Paths.m in Sources */ = {isa = PBXBuildFile; fileRef = B5385E6A1F9641D60086D5E5 /* Firebase+Paths.m */; };
-		B5385E851F9641D60086D5E5 /* BFirebaseUsersHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B5385E6D1F9641D60086D5E5 /* BFirebaseUsersHandler.m */; };
-		B5385E861F9641D60086D5E5 /* BFirebaseSearchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B5385E6E1F9641D60086D5E5 /* BFirebaseSearchHandler.m */; };
-		B5385E871F9641D60086D5E5 /* BFirebaseBlockingHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B5385E6F1F9641D60086D5E5 /* BFirebaseBlockingHandler.m */; };
-		B5385E881F9641D60086D5E5 /* BFirebaseLastOnlineHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B5385E711F9641D60086D5E5 /* BFirebaseLastOnlineHandler.m */; };
-		B5385E891F9641D60086D5E5 /* BFirebaseAuthenticationHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B5385E721F9641D60086D5E5 /* BFirebaseAuthenticationHandler.m */; };
-		B5385E8A1F9641D60086D5E5 /* BFirebasePublicThreadHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B5385E731F9641D60086D5E5 /* BFirebasePublicThreadHandler.m */; };
-		B5385E8B1F9641D60086D5E5 /* BFirebaseModerationHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B5385E771F9641D60086D5E5 /* BFirebaseModerationHandler.m */; };
-		B5385E8C1F9641D60086D5E5 /* BFirebaseCoreHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B5385E7C1F9641D60086D5E5 /* BFirebaseCoreHandler.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0A6C898A6E2363FFF39375AA /* Pods-ChatSDK Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatSDK Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChatSDK Demo/Pods-ChatSDK Demo.release.xcconfig"; sourceTree = "<group>"; };
-		369A95ECCEDC395C4185D9A1 /* Pods_ChatSDK_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatSDK_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1340451633F777ADC5C5C37 /* Pods_ChatSDK_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatSDK_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC7BD9971E0874B400C785EE /* ChatSDK Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ChatSDK Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC7BD99B1E0874B400C785EE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AC7BD99D1E0874B400C785EE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AC7BD99E1E0874B400C785EE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		AC7BD9A01E0874B400C785EE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		AC7BD9A11E0874B400C785EE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		AC7BD9A41E0874B400C785EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AC7BD9A61E0874B400C785EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC7BD9A91E0874B400C785EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AC7BD9AB1E0874B400C785EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC7BD9BE1E096E9000C785EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		B5081AEC1F56DA910015417B /* BFirebaseFileStorageModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFirebaseFileStorageModule.h; sourceTree = "<group>"; };
-		B5081AED1F56DA910015417B /* BFirebaseFileStorageModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFirebaseFileStorageModule.m; sourceTree = "<group>"; };
-		B5081AEE1F56DA910015417B /* BFirebaseUploadHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFirebaseUploadHandler.h; sourceTree = "<group>"; };
-		B5081AEF1F56DA910015417B /* BFirebaseUploadHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFirebaseUploadHandler.m; sourceTree = "<group>"; };
-		B5081AF11F56DA910015417B /* BFirebasePushHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFirebasePushHandler.h; sourceTree = "<group>"; };
-		B5081AF21F56DA910015417B /* BFirebasePushHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFirebasePushHandler.m; sourceTree = "<group>"; };
-		B5081AF31F56DA910015417B /* BFirebasePushModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFirebasePushModule.h; sourceTree = "<group>"; };
-		B5081AF41F56DA910015417B /* BFirebasePushModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFirebasePushModule.m; sourceTree = "<group>"; };
-		B5081AF61F56DA910015417B /* BFirebaseSocialLoginHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFirebaseSocialLoginHandler.h; sourceTree = "<group>"; };
-		B5081AF71F56DA910015417B /* BFirebaseSocialLoginHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFirebaseSocialLoginHandler.m; sourceTree = "<group>"; };
-		B5081AF81F56DA910015417B /* BFirebaseSocialLoginModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFirebaseSocialLoginModule.h; sourceTree = "<group>"; };
-		B5081AF91F56DA910015417B /* BFirebaseSocialLoginModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFirebaseSocialLoginModule.m; sourceTree = "<group>"; };
-		B5081AFA1F56DA910015417B /* BGoogleHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGoogleHelper.h; sourceTree = "<group>"; };
-		B5081AFB1F56DA910015417B /* BGoogleHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGoogleHelper.m; sourceTree = "<group>"; };
-		B5081AFC1F56DA910015417B /* BGoogleLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGoogleLoginViewController.h; sourceTree = "<group>"; };
-		B5081AFD1F56DA910015417B /* BGoogleLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGoogleLoginViewController.m; sourceTree = "<group>"; };
-		B5081AFE1F56DA910015417B /* BGoogleLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BGoogleLoginViewController.xib; sourceTree = "<group>"; };
-		B5081AFF1F56DA910015417B /* icn_200_google@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_200_google@3x.png"; sourceTree = "<group>"; };
-		B5081B001F56DA910015417B /* PGoogleLoginDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGoogleLoginDelegate.h; sourceTree = "<group>"; };
-		B5081B011F56DA910015417B /* SocialLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialLogin.h; sourceTree = "<group>"; };
-		B5385E591F9641D60086D5E5 /* ChatFirebaseAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatFirebaseAdapter.h; sourceTree = "<group>"; };
-		B5385E5B1F9641D60086D5E5 /* BEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEntity.h; sourceTree = "<group>"; };
-		B5385E5C1F9641D60086D5E5 /* CCMessageWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMessageWrapper.h; sourceTree = "<group>"; };
-		B5385E5D1F9641D60086D5E5 /* BFirebaseNetworkAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFirebaseNetworkAdapter.h; sourceTree = "<group>"; };
-		B5385E5E1F9641D60086D5E5 /* CCThreadWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCThreadWrapper.m; sourceTree = "<group>"; };
-		B5385E5F1F9641D60086D5E5 /* CCUserWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCUserWrapper.h; sourceTree = "<group>"; };
-		B5385E601F9641D60086D5E5 /* BStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BStateManager.h; sourceTree = "<group>"; };
-		B5385E611F9641D60086D5E5 /* CCMessageWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMessageWrapper.m; sourceTree = "<group>"; };
-		B5385E621F9641D60086D5E5 /* BEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEntity.m; sourceTree = "<group>"; };
-		B5385E631F9641D60086D5E5 /* BFirebaseNetworkAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFirebaseNetworkAdapter.m; sourceTree = "<group>"; };
-		B5385E641F9641D60086D5E5 /* CCThreadWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCThreadWrapper.h; sourceTree = "<group>"; };
-		B5385E651F9641D60086D5E5 /* BStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BStateManager.m; sourceTree = "<group>"; };
-		B5385E661F9641D60086D5E5 /* CCUserWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCUserWrapper.m; sourceTree = "<group>"; };
-		B5385E681F9641D60086D5E5 /* Firebase+Paths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Firebase+Paths.h"; sourceTree = "<group>"; };
-		B5385E691F9641D60086D5E5 /* NSManagedObject+Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+Status.m"; sourceTree = "<group>"; };
-		B5385E6A1F9641D60086D5E5 /* Firebase+Paths.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Firebase+Paths.m"; sourceTree = "<group>"; };
-		B5385E6B1F9641D60086D5E5 /* NSManagedObject+Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+Status.h"; sourceTree = "<group>"; };
-		B5385E6D1F9641D60086D5E5 /* BFirebaseUsersHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFirebaseUsersHandler.m; sourceTree = "<group>"; };
-		B5385E6E1F9641D60086D5E5 /* BFirebaseSearchHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFirebaseSearchHandler.m; sourceTree = "<group>"; };
-		B5385E6F1F9641D60086D5E5 /* BFirebaseBlockingHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFirebaseBlockingHandler.m; sourceTree = "<group>"; };
-		B5385E701F9641D60086D5E5 /* BFirebaseModerationHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFirebaseModerationHandler.h; sourceTree = "<group>"; };
-		B5385E711F9641D60086D5E5 /* BFirebaseLastOnlineHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFirebaseLastOnlineHandler.m; sourceTree = "<group>"; };
-		B5385E721F9641D60086D5E5 /* BFirebaseAuthenticationHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFirebaseAuthenticationHandler.m; sourceTree = "<group>"; };
-		B5385E731F9641D60086D5E5 /* BFirebasePublicThreadHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFirebasePublicThreadHandler.m; sourceTree = "<group>"; };
-		B5385E741F9641D60086D5E5 /* BFirebaseCoreHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFirebaseCoreHandler.h; sourceTree = "<group>"; };
-		B5385E751F9641D60086D5E5 /* BFirebaseAuthenticationHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFirebaseAuthenticationHandler.h; sourceTree = "<group>"; };
-		B5385E761F9641D60086D5E5 /* BFirebaseLastOnlineHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFirebaseLastOnlineHandler.h; sourceTree = "<group>"; };
-		B5385E771F9641D60086D5E5 /* BFirebaseModerationHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFirebaseModerationHandler.m; sourceTree = "<group>"; };
-		B5385E781F9641D60086D5E5 /* BFirebaseSearchHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFirebaseSearchHandler.h; sourceTree = "<group>"; };
-		B5385E791F9641D60086D5E5 /* BFirebaseBlockingHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFirebaseBlockingHandler.h; sourceTree = "<group>"; };
-		B5385E7A1F9641D60086D5E5 /* BFirebaseUsersHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFirebaseUsersHandler.h; sourceTree = "<group>"; };
-		B5385E7B1F9641D60086D5E5 /* BFirebasePublicThreadHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFirebasePublicThreadHandler.h; sourceTree = "<group>"; };
-		B5385E7C1F9641D60086D5E5 /* BFirebaseCoreHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFirebaseCoreHandler.m; sourceTree = "<group>"; };
-		C1E0C00DE6291F2AF340F82F /* Pods-ChatSDK Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatSDK Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatSDK Demo/Pods-ChatSDK Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		B5736DD220A1F25900D0947B /* ChatSDK Demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ChatSDK Demo.entitlements"; sourceTree = "<group>"; };
+		DE062C0474FC278866061398 /* Pods-ChatSDK Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatSDK Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChatSDK Demo/Pods-ChatSDK Demo.release.xcconfig"; sourceTree = "<group>"; };
+		E4BFA3755FF27F9245670528 /* Pods-ChatSDK Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatSDK Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatSDK Demo/Pods-ChatSDK Demo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,20 +37,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC7777E9AC4696C5650C0624 /* Pods_ChatSDK_Demo.framework in Frameworks */,
+				9BCFD6CC622C2CCA20AE5EA0 /* Pods_ChatSDK_Demo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AC0BCADF675425D258C8F005 /* Pods */ = {
+		69D1C1CD266A890CE066CE7D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C1E0C00DE6291F2AF340F82F /* Pods-ChatSDK Demo.debug.xcconfig */,
-				0A6C898A6E2363FFF39375AA /* Pods-ChatSDK Demo.release.xcconfig */,
+				A1340451633F777ADC5C5C37 /* Pods_ChatSDK_Demo.framework */,
 			);
-			name = Pods;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		AC7BD98E1E0874B400C785EE = {
@@ -139,8 +57,8 @@
 			children = (
 				AC7BD9991E0874B400C785EE /* ChatSDK Demo */,
 				AC7BD9981E0874B400C785EE /* Products */,
-				AC0BCADF675425D258C8F005 /* Pods */,
-				C8B54BE9273467F07490747B /* Frameworks */,
+				EDA14587B736052828BD5DC5 /* Pods */,
+				69D1C1CD266A890CE066CE7D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -155,15 +73,10 @@
 		AC7BD9991E0874B400C785EE /* ChatSDK Demo */ = {
 			isa = PBXGroup;
 			children = (
-				B5385E581F9641D60086D5E5 /* Classes */,
-				B5081AEB1F56DA910015417B /* FirebaseFileStorage */,
-				B5081AF01F56DA910015417B /* FirebasePush */,
-				B5081AF51F56DA910015417B /* FirebaseSocialLogin */,
+				B5736DD220A1F25900D0947B /* ChatSDK Demo.entitlements */,
 				AC7BD9BE1E096E9000C785EE /* GoogleService-Info.plist */,
 				AC7BD99D1E0874B400C785EE /* AppDelegate.h */,
 				AC7BD99E1E0874B400C785EE /* AppDelegate.m */,
-				AC7BD9A01E0874B400C785EE /* ViewController.h */,
-				AC7BD9A11E0874B400C785EE /* ViewController.m */,
 				AC7BD9A31E0874B400C785EE /* Main.storyboard */,
 				AC7BD9A61E0874B400C785EE /* Assets.xcassets */,
 				AC7BD9A81E0874B400C785EE /* LaunchScreen.storyboard */,
@@ -181,121 +94,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		B5081AEB1F56DA910015417B /* FirebaseFileStorage */ = {
+		EDA14587B736052828BD5DC5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B5081AEC1F56DA910015417B /* BFirebaseFileStorageModule.h */,
-				B5081AED1F56DA910015417B /* BFirebaseFileStorageModule.m */,
-				B5081AEE1F56DA910015417B /* BFirebaseUploadHandler.h */,
-				B5081AEF1F56DA910015417B /* BFirebaseUploadHandler.m */,
+				E4BFA3755FF27F9245670528 /* Pods-ChatSDK Demo.debug.xcconfig */,
+				DE062C0474FC278866061398 /* Pods-ChatSDK Demo.release.xcconfig */,
 			);
-			name = FirebaseFileStorage;
-			path = ../../ChatSDKFirebase/FirebaseFileStorage;
-			sourceTree = "<group>";
-		};
-		B5081AF01F56DA910015417B /* FirebasePush */ = {
-			isa = PBXGroup;
-			children = (
-				B5081AF11F56DA910015417B /* BFirebasePushHandler.h */,
-				B5081AF21F56DA910015417B /* BFirebasePushHandler.m */,
-				B5081AF31F56DA910015417B /* BFirebasePushModule.h */,
-				B5081AF41F56DA910015417B /* BFirebasePushModule.m */,
-			);
-			name = FirebasePush;
-			path = ../../ChatSDKFirebase/FirebasePush;
-			sourceTree = "<group>";
-		};
-		B5081AF51F56DA910015417B /* FirebaseSocialLogin */ = {
-			isa = PBXGroup;
-			children = (
-				B5081AF61F56DA910015417B /* BFirebaseSocialLoginHandler.h */,
-				B5081AF71F56DA910015417B /* BFirebaseSocialLoginHandler.m */,
-				B5081AF81F56DA910015417B /* BFirebaseSocialLoginModule.h */,
-				B5081AF91F56DA910015417B /* BFirebaseSocialLoginModule.m */,
-				B5081AFA1F56DA910015417B /* BGoogleHelper.h */,
-				B5081AFB1F56DA910015417B /* BGoogleHelper.m */,
-				B5081AFC1F56DA910015417B /* BGoogleLoginViewController.h */,
-				B5081AFD1F56DA910015417B /* BGoogleLoginViewController.m */,
-				B5081AFE1F56DA910015417B /* BGoogleLoginViewController.xib */,
-				B5081AFF1F56DA910015417B /* icn_200_google@3x.png */,
-				B5081B001F56DA910015417B /* PGoogleLoginDelegate.h */,
-				B5081B011F56DA910015417B /* SocialLogin.h */,
-			);
-			name = FirebaseSocialLogin;
-			path = ../../ChatSDKFirebase/FirebaseSocialLogin;
-			sourceTree = "<group>";
-		};
-		B5385E581F9641D60086D5E5 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				B5385E591F9641D60086D5E5 /* ChatFirebaseAdapter.h */,
-				B5385E5A1F9641D60086D5E5 /* Firebase */,
-				B5385E671F9641D60086D5E5 /* Categories */,
-				B5385E6C1F9641D60086D5E5 /* Handlers */,
-			);
-			name = Classes;
-			path = ../../ChatSDKFirebaseAdapter/Classes;
-			sourceTree = "<group>";
-		};
-		B5385E5A1F9641D60086D5E5 /* Firebase */ = {
-			isa = PBXGroup;
-			children = (
-				B5385E5B1F9641D60086D5E5 /* BEntity.h */,
-				B5385E5C1F9641D60086D5E5 /* CCMessageWrapper.h */,
-				B5385E5D1F9641D60086D5E5 /* BFirebaseNetworkAdapter.h */,
-				B5385E5E1F9641D60086D5E5 /* CCThreadWrapper.m */,
-				B5385E5F1F9641D60086D5E5 /* CCUserWrapper.h */,
-				B5385E601F9641D60086D5E5 /* BStateManager.h */,
-				B5385E611F9641D60086D5E5 /* CCMessageWrapper.m */,
-				B5385E621F9641D60086D5E5 /* BEntity.m */,
-				B5385E631F9641D60086D5E5 /* BFirebaseNetworkAdapter.m */,
-				B5385E641F9641D60086D5E5 /* CCThreadWrapper.h */,
-				B5385E651F9641D60086D5E5 /* BStateManager.m */,
-				B5385E661F9641D60086D5E5 /* CCUserWrapper.m */,
-			);
-			path = Firebase;
-			sourceTree = "<group>";
-		};
-		B5385E671F9641D60086D5E5 /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				B5385E681F9641D60086D5E5 /* Firebase+Paths.h */,
-				B5385E691F9641D60086D5E5 /* NSManagedObject+Status.m */,
-				B5385E6A1F9641D60086D5E5 /* Firebase+Paths.m */,
-				B5385E6B1F9641D60086D5E5 /* NSManagedObject+Status.h */,
-			);
-			path = Categories;
-			sourceTree = "<group>";
-		};
-		B5385E6C1F9641D60086D5E5 /* Handlers */ = {
-			isa = PBXGroup;
-			children = (
-				B5385E6D1F9641D60086D5E5 /* BFirebaseUsersHandler.m */,
-				B5385E6E1F9641D60086D5E5 /* BFirebaseSearchHandler.m */,
-				B5385E6F1F9641D60086D5E5 /* BFirebaseBlockingHandler.m */,
-				B5385E701F9641D60086D5E5 /* BFirebaseModerationHandler.h */,
-				B5385E711F9641D60086D5E5 /* BFirebaseLastOnlineHandler.m */,
-				B5385E721F9641D60086D5E5 /* BFirebaseAuthenticationHandler.m */,
-				B5385E731F9641D60086D5E5 /* BFirebasePublicThreadHandler.m */,
-				B5385E741F9641D60086D5E5 /* BFirebaseCoreHandler.h */,
-				B5385E751F9641D60086D5E5 /* BFirebaseAuthenticationHandler.h */,
-				B5385E761F9641D60086D5E5 /* BFirebaseLastOnlineHandler.h */,
-				B5385E771F9641D60086D5E5 /* BFirebaseModerationHandler.m */,
-				B5385E781F9641D60086D5E5 /* BFirebaseSearchHandler.h */,
-				B5385E791F9641D60086D5E5 /* BFirebaseBlockingHandler.h */,
-				B5385E7A1F9641D60086D5E5 /* BFirebaseUsersHandler.h */,
-				B5385E7B1F9641D60086D5E5 /* BFirebasePublicThreadHandler.h */,
-				B5385E7C1F9641D60086D5E5 /* BFirebaseCoreHandler.m */,
-			);
-			path = Handlers;
-			sourceTree = "<group>";
-		};
-		C8B54BE9273467F07490747B /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				369A95ECCEDC395C4185D9A1 /* Pods_ChatSDK_Demo.framework */,
-			);
-			name = Frameworks;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,12 +110,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AC7BD9AE1E0874B400C785EE /* Build configuration list for PBXNativeTarget "ChatSDK Demo" */;
 			buildPhases = (
-				BB6D2899AF0D0B8D70D3138C /* [CP] Check Pods Manifest.lock */,
+				BD3A7ACF5CCC1366902225B0 /* [CP] Check Pods Manifest.lock */,
 				AC7BD9931E0874B400C785EE /* Sources */,
 				AC7BD9941E0874B400C785EE /* Frameworks */,
 				AC7BD9951E0874B400C785EE /* Resources */,
-				4760E04A5E85E1B9BFAE1396 /* [CP] Embed Pods Frameworks */,
-				9932F27FAB31530A45B47BEE /* [CP] Copy Pods Resources */,
+				B5030DB2202883D0001BF175 /* ShellScript */,
+				62D8972BFD00FFB9A6182F9B /* [CP] Embed Pods Frameworks */,
+				016965BD58B3C6F38BE7677C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -327,7 +133,7 @@
 		AC7BD98F1E0874B400C785EE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = deluge;
 				TargetAttributes = {
 					AC7BD9961E0874B400C785EE = {
@@ -335,6 +141,14 @@
 						DevelopmentTeam = P7RPLLCMTA;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -363,9 +177,7 @@
 			files = (
 				AC7BD9AA1E0874B400C785EE /* LaunchScreen.storyboard in Resources */,
 				AC7BD9BF1E096E9000C785EE /* GoogleService-Info.plist in Resources */,
-				B5081B0B1F56DA910015417B /* icn_200_google@3x.png in Resources */,
 				AC7BD9A71E0874B400C785EE /* Assets.xcassets in Resources */,
-				B5081B0A1F56DA910015417B /* BGoogleLoginViewController.xib in Resources */,
 				AC7BD9A51E0874B400C785EE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -373,7 +185,35 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4760E04A5E85E1B9BFAE1396 /* [CP] Embed Pods Frameworks */ = {
+		016965BD58B3C6F38BE7677C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ChatSDK Demo/Pods-ChatSDK Demo-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/ChatSDK/ChatCore.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/ChatSDK/ChatCoreData.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/ChatSDK/ChatFirebaseSocialLogin.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/ChatSDK/ChatUI.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ChatCore.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ChatCoreData.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ChatFirebaseSocialLogin.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ChatUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterKitResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChatSDK Demo/Pods-ChatSDK Demo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		62D8972BFD00FFB9A6182F9B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -382,7 +222,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-ChatSDK Demo/Pods-ChatSDK Demo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
-				"${BUILT_PRODUCTS_DIR}/ChatSDK/ChatSDK.framework",
+				"${BUILT_PRODUCTS_DIR}/ChatSDKKeepLayout/KeepLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/CountryPicker/CountryPicker.framework",
 				"${BUILT_PRODUCTS_DIR}/DateTools/DateTools.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -391,6 +231,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Hakawai/Hakawai.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
@@ -399,6 +240,9 @@
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/StaticDataTableViewController/StaticDataTableViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/TOCropViewController/TOCropViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/Toast/Toast.framework",
+				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
 				"${BUILT_PRODUCTS_DIR}/VENTokenField/VENTokenField.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -407,7 +251,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChatSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeepLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CountryPicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateTools.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
@@ -416,6 +260,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hakawai.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -424,6 +269,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StaticDataTableViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TOCropViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VENTokenField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -433,28 +281,20 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChatSDK Demo/Pods-ChatSDK Demo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9932F27FAB31530A45B47BEE /* [CP] Copy Pods Resources */ = {
+		B5030DB2202883D0001BF175 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ChatSDK Demo/Pods-ChatSDK Demo-resources.sh",
-				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle,
-				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebasePhoneAuthUI.bundle,
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-				"${PODS_ROOT}/TwitterKit/TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle",
 			);
-			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChatSDK Demo/Pods-ChatSDK Demo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\"";
 		};
-		BB6D2899AF0D0B8D70D3138C /* [CP] Check Pods Manifest.lock */ = {
+		BD3A7ACF5CCC1366902225B0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -479,33 +319,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5385E891F9641D60086D5E5 /* BFirebaseAuthenticationHandler.m in Sources */,
-				B5385E8A1F9641D60086D5E5 /* BFirebasePublicThreadHandler.m in Sources */,
-				B5081AC71F56C04B0015417B /* AppDelegate.h in Sources */,
-				B5385E7E1F9641D60086D5E5 /* CCMessageWrapper.m in Sources */,
-				B5385E801F9641D60086D5E5 /* BFirebaseNetworkAdapter.m in Sources */,
-				B5081B031F56DA910015417B /* BFirebaseUploadHandler.m in Sources */,
 				B5081AC81F56C04B0015417B /* AppDelegate.m in Sources */,
-				B5385E821F9641D60086D5E5 /* CCUserWrapper.m in Sources */,
-				B5385E7D1F9641D60086D5E5 /* CCThreadWrapper.m in Sources */,
-				B5385E881F9641D60086D5E5 /* BFirebaseLastOnlineHandler.m in Sources */,
-				B5385E861F9641D60086D5E5 /* BFirebaseSearchHandler.m in Sources */,
 				B5081AC91F56C04B0015417B /* main.m in Sources */,
-				B5385E871F9641D60086D5E5 /* BFirebaseBlockingHandler.m in Sources */,
-				B5081B021F56DA910015417B /* BFirebaseFileStorageModule.m in Sources */,
-				B5385E851F9641D60086D5E5 /* BFirebaseUsersHandler.m in Sources */,
-				B5385E831F9641D60086D5E5 /* NSManagedObject+Status.m in Sources */,
-				B5385E811F9641D60086D5E5 /* BStateManager.m in Sources */,
-				B5385E7F1F9641D60086D5E5 /* BEntity.m in Sources */,
-				B5081B071F56DA910015417B /* BFirebaseSocialLoginModule.m in Sources */,
-				B5081B081F56DA910015417B /* BGoogleHelper.m in Sources */,
-				B5081B041F56DA910015417B /* BFirebasePushHandler.m in Sources */,
-				B5081B061F56DA910015417B /* BFirebaseSocialLoginHandler.m in Sources */,
-				B5081B051F56DA910015417B /* BFirebasePushModule.m in Sources */,
-				B5385E8C1F9641D60086D5E5 /* BFirebaseCoreHandler.m in Sources */,
-				B5385E841F9641D60086D5E5 /* Firebase+Paths.m in Sources */,
-				B5385E8B1F9641D60086D5E5 /* BFirebaseModerationHandler.m in Sources */,
-				B5081B091F56DA910015417B /* BGoogleLoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,15 +354,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -586,15 +409,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -621,14 +452,15 @@
 		};
 		AC7BD9AF1E0874B400C785EE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C1E0C00DE6291F2AF340F82F /* Pods-ChatSDK Demo.debug.xcconfig */;
+			baseConfigurationReference = E4BFA3755FF27F9245670528 /* Pods-ChatSDK Demo.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "ChatSDK Demo/ChatSDK Demo.entitlements";
 				DEVELOPMENT_TEAM = P7RPLLCMTA;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "ChatSDK Demo/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "co.deluge.Chat-SDK";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -637,14 +469,15 @@
 		};
 		AC7BD9B01E0874B400C785EE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0A6C898A6E2363FFF39375AA /* Pods-ChatSDK Demo.release.xcconfig */;
+			baseConfigurationReference = DE062C0474FC278866061398 /* Pods-ChatSDK Demo.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "ChatSDK Demo/ChatSDK Demo.entitlements";
 				DEVELOPMENT_TEAM = P7RPLLCMTA;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "ChatSDK Demo/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "co.deluge.Chat-SDK";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;

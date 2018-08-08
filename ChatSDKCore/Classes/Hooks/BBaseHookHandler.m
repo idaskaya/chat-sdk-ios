@@ -7,13 +7,13 @@
 //
 
 #import "BBaseHookHandler.h"
-#import <ChatSDK/ChatCore.h>
+#import <ChatSDK/Core.h>
 
 @implementation BBaseHookHandler {
     NSMutableDictionary * _hooks;
 }
 
--(id) init {
+-(instancetype) init {
     if((self = [super init])) {
         _hooks = [NSMutableDictionary new];
     }

@@ -8,7 +8,7 @@
 
 #import "BBaseContactHandler.h"
 
-#import <ChatSDK/ChatCore.h>
+#import <ChatSDK/Core.h>
 
 @implementation BBaseContactHandler
 
@@ -16,11 +16,11 @@
     return [NM.currentUser connectionsWithType:bUserConnectionTypeContact];
 }
 
--(NSArray<PUser> *) contactsWithType: (bUserConnectionType) type {
+-(NSArray *) contactsWithType: (bUserConnectionType) type {
     return [NM.currentUser contactsWithType: type];
 }
 
--(NSArray<PUserConnection> *) connectionsWithType: (bUserConnectionType) type {
+-(NSArray *) connectionsWithType: (bUserConnectionType) type {
     return [NM.currentUser connectionsWithType:type];
 }
 

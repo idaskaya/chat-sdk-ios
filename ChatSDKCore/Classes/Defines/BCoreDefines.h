@@ -21,13 +21,11 @@
 #define bDefaultMessageColorReply @"d7d4d3"
 
 #define bDefaultProfileImage @"icn_100_anonymous.png"
-#define bDefaultPublicGroupImage @"icn_100_anonymousGroup.png"
+#define bDefaultPublicGroupImage @"icn_100_anonymous_group.png"
 #define bDefaultPlaceholderImage @"icn_300_placeholder.png"
 
 #define bDefaultFontSize 17
 #define bDefaultUserNameLabelSize 14
 #define bDefaultTextColor @"000000"
-
-#define bDefaultTimeFormat @"HH:mm"
 
 #endif /* BCoreDefines_h */

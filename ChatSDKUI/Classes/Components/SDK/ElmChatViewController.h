@@ -6,33 +6,33 @@
 //  Copyright (c) 2013 deluge. All rights reserved.
 //
 
-#import <ChatSDK/BTextInputDelegate.h>
+#import <ChatSDK/PSendBarDelegate.h>
 #import <ChatSDK/bChatState.h>
 #import <ChatSDK/BChatOptionDelegate.h>
 #import <ChatSDK/PElmMessage.h>
 #import <ChatSDK/ElmChatViewDelegate.h>
 
-
 @protocol PChatOptionsHandler;
+@protocol PImageViewController;
+@protocol PSendBar;
 
 @class MPMoviePlayerController;
 @class BTextInputView;
 @class BImageViewController;
 @class BLocationViewController;
 @class BMessageSection;
+@class BNotificationObserverList;
 
-@interface ElmChatViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, BTextInputDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, BChatOptionDelegate> {
+@interface ElmChatViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, PSendBarDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, BChatOptionDelegate> {
     
     NSArray<BMessageSection *> * _messages;
     
-    BTextInputView * _textInputView;
+    UIView<PSendBar> * _sendBarView;
     
     UIGestureRecognizer * _tapRecognizer;
     
-    BImageViewController * _imageViewController;
     UINavigationController * _imageViewNavigationController;
 
-    BLocationViewController * _locationViewController;
     UINavigationController * _locationViewNavigationController;
     
     UIRefreshControl * _refreshControl;
@@ -49,14 +49,20 @@
     UIView * _keyboardOverlay;
     
     id<PChatOptionsHandler> _optionsHandler;
+    
+    BNotificationObserverList * _notificationList;
+    
+    BOOL _observersAdded;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView * tableView;
 @property (nonatomic, readwrite, weak) id<ElmChatViewDelegate> delegate;
+@property (nonatomic, readonly) UIView<PSendBar> * sendBarView;
+@property (nonatomic, readonly) UILabel * titleLabel;
 
 @property (strong, nonatomic) MPMoviePlayerController * videoPlayer;
 
-- (id)initWithDelegate: (id<ElmChatViewDelegate>) delegate;
+-(instancetype) initWithDelegate: (id<ElmChatViewDelegate>) delegate;
 
 -(void) setTitle: (NSString *) title;
 -(void) setSubtitle: (NSString *) subtitle;
@@ -72,6 +78,8 @@
 
 -(void) setTextInputDisabled: (BOOL) disabled;
 -(void) setTableViewBottomContentInset: (float) inset;
+
+-(void) registerMessageCells;
 
 // To be overridden
 -(void) addObservers;

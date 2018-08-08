@@ -8,8 +8,8 @@
 
 #import "BUsersViewController.h"
 
-#import <ChatSDK/ChatCore.h>
-#import <ChatSDK/ChatUI.h>
+#import <ChatSDK/Core.h>
+#import <ChatSDK/UI.h>
 
 #define bUserCellIdentifier @"UserCellIdentifier"
 #define bLeaveCellIdentifier @"LeaveCellIdentifier"
@@ -29,9 +29,9 @@
 
 @synthesize tableView;
 
-- (id)initWithThread: (id<PThread>) thread {
+-(instancetype) initWithThread: (id<PThread>) thread {
 
-    self = [super initWithNibName:@"BUsersViewController" bundle:[NSBundle chatUIBundle]];
+    self = [super initWithNibName:@"BUsersViewController" bundle:[NSBundle uiBundle]];
     if (self) {
         
         _users = [NSMutableArray arrayWithArray: thread.users.allObjects];
@@ -110,17 +110,15 @@
         
         if (_users.count) {
             
-            CGSize itemSize = CGSizeMake(0, 0);
-            
             id<PUser> user = _users[indexPath.row];
             
             cell.textLabel.text = user.name;
-            cell.imageView.image = user && user.thumbnail ? [UIImage imageWithData:user.thumbnail] : [NSBundle chatUIImageNamed: @"icn_user.png"];
+            cell.imageView.image = user && user.thumbnail ? [UIImage imageWithData:user.thumbnail] : [NSBundle uiImageNamed: @"icn_user.png"];
             
             cell.imageView.layer.cornerRadius = 20;
             cell.imageView.clipsToBounds = YES;
             
-            itemSize = CGSizeMake(40, 40);
+            CGSize itemSize = CGSizeMake(40, 40);
             
             UIGraphicsBeginImageContextWithOptions(itemSize, NO, UIScreen.mainScreen.scale);
             CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
@@ -177,11 +175,7 @@
         
         // Use initWithThread here to make sure we don't show any users already in the thread
         // Show the friends view controller
-        BFriendsListViewController * flvc = [[BInterfaceManager sharedManager].a friendsViewControllerWithUsersToExclude:_thread.users.allObjects];
-        flvc.rightBarButtonActionTitle = [NSBundle t:bAdd];
-        
-        // The friends view controller will give us a list of users to invite
-        flvc.usersToInvite = ^(NSArray * users, NSString * groupName){
+        UINavigationController * nav = [[BInterfaceManager sharedManager].a friendsViewControllerWithUsersToExclude:_thread.users.allObjects onComplete:^(NSArray * users, NSString * groupName){
             
             [NM.core addUsers:users toThread:_thread].thenOnMain(^id(id success){
                 [UIView alertWithTitle:[NSBundle t:bSuccess] withMessage:[NSBundle t:bAdded]];
@@ -189,9 +183,10 @@
                 [self reloadData];
                 return Nil;
             }, Nil);
-        };
+        }];
+        [((id<PFriendsListViewController>) nav.topViewController) setRightBarButtonActionTitle:[NSBundle t: bAdd]];
         
-        [self presentViewController:[[UINavigationController alloc] initWithRootViewController:flvc] animated:YES completion:Nil];
+        [self presentViewController:nav animated:YES completion:Nil];
     }
     if (indexPath.section == bLeaveConvoSection) {
         
